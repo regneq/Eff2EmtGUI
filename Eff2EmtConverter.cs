@@ -474,11 +474,19 @@ namespace Eff2EmtGUI
                 {
                     case 0: // Day/Night Sound Effect, Constant Volume
                         _soundFile1 = SoundFileNumber(_effEntry.SoundID1);
-                        _soundFile2 = SoundFileNumber(_effEntry.SoundID2);
-                        _sound1.WhenActive = 1;
+                        if (_effEntry.SoundID1 == _effEntry.SoundID2)
+                        {
+                            _soundFile2 = "";
+                            _sound1.WhenActive = 0;
+                        }
+                        else
+                        {
+                            _soundFile2 = SoundFileNumber(_effEntry.SoundID2);
+                            _sound1.WhenActive = 1;
+                        }
                         break;
                     case 1: // Background Music
-                        _soundFile1 = (_effEntry.SoundID1 < 0) ? SoundFileNumber(_effEntry.SoundID1) : (_effEntry.SoundID1 == 0) ? "" : ZoneNick + ".xmi";
+                        _soundFile1 = (_effEntry.SoundID1 < 0) ? SoundFileNumber(_effEntry.SoundID1) : (_effEntry.SoundID1 == 0) ? ZoneNick + ".xmi" : ZoneNick + ".xmi";
                         if (_effEntry.SoundID1 == _effEntry.SoundID2)
                         {
                             _soundFile2 = "";
